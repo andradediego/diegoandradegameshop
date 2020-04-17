@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jester Game Shop</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">	
+	<link href="css/main.css" rel="stylesheet">
+</head>
+<body>
+
+	<!-- navbar -->
+	<header class="fix-header">
+		<div class="header clearfix wrapper">
+			<nav class="mt-10">
+				<ul class="nav nav-pills pull-right">
+					<li role="presentation" class="active">
+						<a id="btn-home" href="#" class="color-white"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+					</li>
+					<li role="presentation">
+						<a id="btn-cart" href="#" class="color-white">
+							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
+							Cart
+							<span id="txt-badge-cart" class="badge hide-element">0</span>
+						</a>
+					</li>					
+				</ul>
+			</nav>
+			<h3 class="text-muted text-logo" id="logo-text">Jester Game Shop</h3>
+		</div>
+	</header>
+
+	<main>
+		<!-- List of items -->
+		<div id="container-itens" class="container mb-80">
+			<div class="row">
+				<div class="col-md-2 col-md-offset-10 col-xs-12">					
+					<div class="text-right-lg-screen my-10">												
+						<select id="input-currency" class="form-control wd-100"></select>						
+					</div>				
+				</div>
+			</div>
+			<div class="row">
+				<!-- Tab Link -->
+				<ul id="main-nav-tabs" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="tab-element active">
+						<a role="tab" data-toggle="tab" onclick="displayItensByFilter(this)">All</a>
+					</li>					
+				</ul>
+			
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active col-container" id="main_items"></div>					
+				</div>
+			</div>
+		</div>
+
+		<!-- items details -->
+		<div id="container-item-details" class="container hide-element mb-80">
+			<!-- button small device -->
+			<div class="row">
+				<div class="col-sm-12 display-small-device mb-10">
+					<button class="btn btn-default btn-block" onclick="onBackFromDetails()"> 
+						<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+						Back
+					</button>
+				</div>
+
+
+				<div class="col-md-6 col-sm-12">
+					<div class="img-wrapper-bg">
+						<img id="item_image" src="#" alt="" class="img-big">	
+					</div>
+				</div>				
+				<div class="col-md-6 col-sm-12">
+					<!-- button large device -->
+					<button class="btn btn-default btn-back hide-small-device" onclick="onBackFromDetails()"> 
+						<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+						Back
+					</button>
+
+					<h3 id="item_name">[name]</h3>
+					<h3 id="item_price">$[price]</h3>
+					<h4 id="item_id">Item Id: [id]</h4>
+					<h4 id="item_quantity_in_stock">Avaiable: [quantityInStock]</h4>
+					<h4 id="item_max_per_costumer">Max per costumer: [maxPerCostumer]</h4>
+					<h4 id="item_cost_shipping">Cost of shipping: [costShipping]</h4>
+					<p id="item_description">Description: [description]</p>
+				</div>
+			</div>
+			<div class="row mt-10">
+				<div class="col-sm-12">
+					<!-- Reviews placeholder -->
+					<div id="previous-reviews">						
+					</div>
+					<div class="form-group">
+						<label for="review-product">Review</label>
+						<textarea class="form-control" rows="3" id="review-product"></textarea>
+					</div>
+					<button class="btn-add-review btn btn-primary btn-lg btn-lg-screen hide-small-device" data-item-id="">Add Review</button>
+					<button class="btn-add-review btn-primary btn-block display-small-device" data-item-id="">Add Review</button>					
+				</div>
+			</div>
+		</div>
+		
+		<!-- cart items -->
+		<div id="container-cart" class="hide-element container mb-80">		
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th class="text-right">Price</th>
+								<th>Quantity</th>
+								<th class="text-right">Subtotal</th>
+							</tr>
+						</thead>
+						<tbody id="table-cart-items">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+	
+
+	<footer>
+		<div class="footer-text">
+			<span>© 2020 Jester Game Shop</span>
+			<span class="pull-right" id="txt-time"></span>
+		</div>		
+	</footer>
+
+
+	<div class="proto_items">
+		<div id="proto_item">
+			<div class="col-md-3 col-sm-12 border-standard col" >
+				<div class="img-wrapper">
+					<img src="[image]" alt="" class="img-md">	
+				</div>
+				<h4 class="text-center txt-padding">[name]</h4>
+				<div class="pa-5 text-center">
+					<span class="txt-price">[price]</span>
+				</div>
+				<div class="text-center">
+					<button class="btn btn-default" data-id-product="[id]" onclick="onDetailsItems([id])">
+						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+						Details
+					</button>
+					<button class="btn btn-default" data-id-product="[id]" onclick="onAddCart([id])">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						Add to Cart
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="proto_item_link_tab">
+			<li role="presentation" class="tab-element">
+				<a aria-controls="home" role="tab" data-toggle="tab" onclick="displayItensByFilter(this,'[name]')">[name]</a>
+			</li>
+		</div>
+
+		<div id="proto_item_tab">
+			<div role="tabpanel" class="tab-pane active col-container" id="main_items_[category]">						
+			</div>
+		</div>		
+
+		<div id="proto_item_reviews">
+			<p class="bg-info"></p>
+		</div>
+
+		<div id="proto_item_currency">
+			<option value="[value]">[name]</option>
+		</div>
+
+
+		<table id="proto_row_cart">
+			<tbody>
+				<tr class="table-cart-row-item" data-item-id="[id]">
+					<td scope="row">[id]</td>
+					<td class="text-right">[price]</td>
+					<td>
+						<select 
+							data-item-id="[id]"
+						 onchange="onChangeQuantity([id])"
+						 class="form-control drop-quantity-item">
+							<option value="0">Qtd 0 (delete)</option>
+							<option value="1">Qtd 1</option>
+							<option value="2">Qtd 2</option>
+							<option value="3">Qtd 3</option>
+							<option value="4">Qtd 4</option>
+							<option value="5">Qtd 5</option>
+							<option value="6">Qtd 6</option>
+							<option value="7">Qtd 7</option>
+							<option value="8">Qtd 8</option>
+							<option value="9">Qtd 9</option>
+							<option value="10">Qtd 10</option>
+							<option value="11">+ 10</option>
+						</select>
+						<div class="form-group">
+							<input type="number"
+							data-item-id="[id]" 
+							class="hide-element form-control txt-new-quantity-value max-width-75 display-inline" 
+							onchange="onChangeQuantityByType([id])"							
+							data-item-id="[id]" />
+							<button 
+								data-item-id="[id]"
+								class="btn btn-primary hide-element btn-new-quantity-value" 
+								onclick="onClickChangeQuantityItem([id])">
+								Accept
+							</button>
+							<button 
+								data-item-id="[id]"
+								class="btn btn-default hide-element btn-cancel-quantity-value" 
+								onclick="onClickCancelChangeQuantityItem([id])">
+								Cancel
+							</button>
+						</div>																		
+					</td>
+					<td class="text-right">[subtotal]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script src="js/objects.js"></script>
+	<script src="js/globalVariables.js"></script>
+	<script src="js/homeElements.js"></script>
+	<script src="js/cart.js"></script>	
+	<script src="js/mains.js"></script>	
+</body>
+</html>

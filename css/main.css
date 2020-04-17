@@ -1,0 +1,181 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.display-small-device {
+  display: none;
+}
+
+.hide-small-device {
+  display: block;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.text-right-lg-screen {
+  text-align: right;
+}
+
+@media (max-width: 992px) { 
+  .display-small-device {
+    display: block;
+  }
+
+  .hide-small-device {
+    display: none;
+  }  
+
+  .text-right-lg-screen {
+    text-align: left;
+  }
+}
+
+.color-white {
+  color: white;
+}
+
+.badge {
+  background-color: white;
+  color: rgba(47,85,114);
+}
+
+.text-logo {
+  font-family: 'Pacifico', cursive;
+  color: white;
+  padding-left: 10px;  
+}
+.text-logo:hover {
+  cursor: pointer;
+}
+
+.footer-text  {
+  background-color: rgba(47,85,114);
+  color: white;
+  padding: 15px;
+}
+
+.img-md {
+  max-width: 250px;
+  max-height: 200px;  
+  height: auto;
+}
+
+.img-big {
+  max-width: 450px;
+  max-height: 400px;  
+  height: auto;
+}
+
+.proto_items {
+  display: none;
+}
+
+
+.fix-header {
+  position: fixed;
+  padding: 10px 0;
+  width: 100%;
+  z-index: 2;
+  background-color: rgba(47,85,114);
+  top: 0;
+}
+
+header, nav, section {
+  display: block;
+}
+
+.wrapper {
+  padding-left: 18px;
+  padding-right: 18px;
+  max-width: 1236px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.col-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1 0 21%;  
+  height: 375px;
+  padding: 2px;
+  margin-top: 40px;
+}
+
+.img-wrapper {
+  height: 235px;
+  text-align: center;
+}
+
+.img-wrapper-bg {  
+  text-align: center;
+  height: auto;
+}
+
+.bg-info {
+  padding: 10px;
+}
+
+.txt-padding {
+  height: 60px;
+  padding: 5px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.my-10 {
+  margin: 10px 0;
+}
+
+.mb-80 {
+  margin-bottom: 80px;
+}
+
+.pa-5 {
+  padding: 5px;
+}
+
+.wd-100 {
+  width: 100%!important;
+}
+
+.max-width-75 {
+  width: 75px;
+}
+
+.display-inline {
+  display: inline-block!important;
+}
+
+
+.hide-element {
+  display: none!important;
+}
+
+#container-itens, #container-cart, #container-item-details {
+  margin-top: 100px;
+}
+
+.txt-price {
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(47,85,114);
+}
+
+#table-cart-items tr td {
+  font-size: 24px;
+}
