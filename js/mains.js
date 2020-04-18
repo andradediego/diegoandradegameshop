@@ -64,7 +64,10 @@ function populateItems(category, currencyValue) {
 function addElementToPage (storeItems, currencyValue) {
 	let elementBase = protoItem.innerHTML;		
 	var storeItem = storeItems;		
+	currencyValue = parseFloat(currencyValue);
+	
 	var objKeys = Object.keys(storeItems);
+
 	for (let i = 0; i < objKeys.length; i++) {
 		if(objKeys[i] == 'price') {
 			elementBase = elementBase.split('[' + objKeys[i] + ']').join('$' + (currencyValue * storeItem[objKeys[i]]).toFixed(2));
@@ -187,8 +190,9 @@ btnCart.addEventListener('click', function(event) {
 });
 
 // change the currency
-inputCurrency.addEventListener('change', function(event) {	
-	populateItems(null, this.value);	
+inputCurrency.addEventListener('change', function(event) {
+	populateItems(null, this.value);
+	populateCart();
 	event.preventDefault();
 });
 

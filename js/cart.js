@@ -229,7 +229,8 @@ function showHideButtonsChangeQuantity(id, show) {
 // populate cart items 
 function populateCart() {
 	
-	tableCartItems.innerHTML = '';	
+	tableCartItems.innerHTML = '';
+	const currencyValue = parseFloat( inputCurrency.value );
 	for (let index = 0; index < cartItems.length; index++) {
 		
 
@@ -239,7 +240,7 @@ function populateCart() {
 		for (let i = 0; i < objKeys.length; i++) {
 			switch (objKeys[i]) {
 				case 'price':
-					elementBase = elementBase.split('[' + objKeys[i] + ']').join('$' + item[objKeys[i]].toFixed(2));
+					elementBase = elementBase.split('[' + objKeys[i] + ']').join('$' + ( currencyValue * item[objKeys[i]]).toFixed(2));
 					break;			
 				default:
 					elementBase = elementBase.split('[' + objKeys[i] + ']').join(item[objKeys[i]]);
@@ -248,7 +249,7 @@ function populateCart() {
 			
 		}
 
-		elementBase = elementBase.split('[subtotal]').join('$' + (item.price * item.quantity).toFixed(2) );		
+		elementBase = elementBase.split('[subtotal]').join('$' + (currencyValue * (item.price * item.quantity)).toFixed(2) );
 		tableCartItems.innerHTML += elementBase;
 	}
 

@@ -166,7 +166,7 @@ header, nav, section {
   display: none!important;
 }
 
-#container-itens, #container-cart, #container-item-details {
+#container-currency {
   margin-top: 100px;
 }
 
