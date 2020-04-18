@@ -6,17 +6,7 @@ function onGetDate() {
   txtTime.innerHTML = dateTime;
 }
 
-function getItemById(id) {
-	var item = null;
-	
-	for (let index = 0; index < storeItems.length; index++) {
-		if (storeItems[index].id == id) {
-			item = storeItems[index];
-		}
-	}
 
-	return item;
-}
 
 function populatePrototype (destination, item, protype) {
 	let elementBase = protype.innerHTML;
@@ -99,45 +89,6 @@ function onAddReview() {
 	}
 }
 
-// back to main page
-function onBackFromDetails () {
-	containerItens.classList.remove('hide-element');
-	containerCart.classList.add('hide-element');
-	containerItemDetails.classList.add('hide-element');	
-}
-
-
-// to details page
-function onDetailsItems (id) {	
-	containerItens.classList.add('hide-element');
-	containerCart.classList.add('hide-element');
-	containerItemDetails.classList.remove('hide-element');
-
-	id = parseInt(id);
-	
-	var item = getItemById(id);
-
-	if (item) {
-		itemImage.src = item.image;
-		itemName.innerHTML = item.name;
-		itemPrice.innerHTML = '$' + item.price.toFixed(2);
-		itemId.innerHTML = item.id;
-		itemQuantityInStock.innerHTML = 'Available: ' + item.quantityInStock;
-		itemMaxPerCostumer.innerHTML = 'Max per costumer: ' + item.maxPerCostumer;
-		itemCostShipping.innerHTML = 'Cost of shipping: ' + item.costShipping;
-		itemDescription.innerHTML = 'Description: ' +  item.description;
-		
-
-		for (let index = 0; index < btnAddReview.length; index++) {			
-			btnAddReview[index].setAttribute("data-item-id", item.id);
-		}
-		
-		addReview(item);
-		
-	} else {
-		alert('An error occour please try again later!');
-	}
-}
 
 function addReview (item) {
 	previousReviews.innerHTML = '';
@@ -157,43 +108,74 @@ function displayItensByFilter(element, category) {
 	populateItems(category);
 }
 
-function toggleHomeCart(displayHome) {
-	if (displayHome) {
-		btnHome.parentElement.classList.add('active');
-		btnCart.parentElement.classList.remove('active');
-		containerCart.classList.add("hide-element");
-		containerItens.classList.remove("hide-element");	
-	} else {
-		btnCart.parentElement.classList.add('active');
-		btnHome.parentElement.classList.remove('active');
-		containerItens.classList.add("hide-element");
-		containerCart.classList.remove("hide-element");		
+function switchBetweenContainers(numberContainer) {
+
+	containerItemDetails.classList.add("hide-element");
+	inputItemIdValidation.value = '';
+	inputItemQuantityValidation.value = '';
+
+	switch (numberContainer) {
+		case 1:
+			btnHome.parentElement.classList.add('active');
+			btnCart.parentElement.classList.remove('active');
+			btnValidation.parentElement.classList.remove('active');
+
+			containerItens.classList.remove("hide-element");
+			containerCart.classList.add("hide-element");
+			containerValidation.classList.add("hide-element");
+			containerCurrency.classList.remove("hide-element");	
+			break;
+		case 2:
+			btnCart.parentElement.classList.add('active');
+			btnHome.parentElement.classList.remove('active');
+			btnValidation.parentElement.classList.remove('active');
+
+			containerCart.classList.remove("hide-element");
+			containerItens.classList.add("hide-element");
+			containerValidation.classList.add("hide-element");
+			containerCurrency.classList.remove("hide-element");			
+			break;
+		case 3:
+			btnValidation.parentElement.classList.add('active');
+			btnHome.parentElement.classList.remove('active');
+			btnCart.parentElement.classList.remove('active');
+
+			containerValidation.classList.remove("hide-element");
+			containerCart.classList.add("hide-element");			
+			containerItens.classList.add("hide-element");	
+			containerCurrency.classList.add("hide-element");
+			break;
 	}
 }
 
 
 // button to change to home
 btnHome.addEventListener('click', function(event) {
-	toggleHomeCart(true);
+	switchBetweenContainers(1);
 	event.preventDefault();
 });
 
 linkHomePage.addEventListener('click', function(event) {
-	toggleHomeCart(true);
+	switchBetweenContainers(1);
 	event.preventDefault();
 });
 
 // button to change to home
 logoText.addEventListener('click', function(event) {
-	toggleHomeCart(true);
+	switchBetweenContainers(1);
 	event.preventDefault();
 });
 
-
 // button to change to cart
 btnCart.addEventListener('click', function(event) {
-	toggleHomeCart(false);	
+	switchBetweenContainers(2);	
 	populateCart();	
+	event.preventDefault();
+});
+
+// button validation
+btnValidation.addEventListener('click', function(event) {
+	switchBetweenContainers(3);
 	event.preventDefault();
 });
 

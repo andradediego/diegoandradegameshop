@@ -31,7 +31,7 @@ storeItems.push(new StoreItem(
 	'Sony PlayStation 4 Pro 1TB Limited Edition Console - Marvel\'s Spider-Man Bundle',
 	925.27,
 	generateRandomQuantity(),
-	16,
+	2,
 	getCategoryId(categories, 'Consoles'),
 	5.0,
 	'Experience a brand-new and authentic Spider-Man adventure with a fully customized Amazing Red PS4 Pro console featuring the Spider icon, DUALSHOCK 4 wireless controller, Marvel’s Spider-Man game, and digital content. This isn’t the Spider-Man you’ve met or ever seen before. This is an experienced Peter Parker who’s more masterful at fighting big crime in New York City. At the same time, he’s struggling to balance his chaotic personal life and career while the fate of millions of New Yorkers rest upon his shoulders.',

@@ -25,7 +25,14 @@
 							Cart
 							<span id="txt-badge-cart" class="badge hide-element">0</span>
 						</a>
-					</li>					
+					</li>
+					<li role="presentation">
+						<a id="btn-validation" href="#" class="color-white">
+							<span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 
+							Validation
+							<span id="txt-badge-cart" class="badge hide-element">0</span>
+						</a>
+					</li>						
 				</ul>
 			</nav>
 			<h3 class="text-muted text-logo" id="logo-text">Jester Game Shop</h3>
@@ -69,10 +76,9 @@
 				<div class="col-sm-12 display-small-device mb-10">
 					<button class="btn btn-default btn-block" onclick="onBackFromDetails()"> 
 						<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-						Back
+						<span class="txt-origin-text">Back</span>
 					</button>
 				</div>
-
 
 				<div class="col-md-6 col-sm-12">
 					<div class="img-wrapper-bg">
@@ -83,7 +89,7 @@
 					<!-- button large device -->
 					<button class="btn btn-default btn-back hide-small-device" onclick="onBackFromDetails()"> 
 						<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-						Back
+						<span class="txt-origin-text">Back</span>
 					</button>
 
 					<h3 id="item_name">[name]</h3>
@@ -139,7 +145,7 @@
 								<td id="cart-estimated-shipping" class="text-right"></td>
 							</tr>
 							<tr class="info">
-								<td colspan="3" class="text-right">Estimated Shipping:</td>
+								<td colspan="3" class="text-right">Subtotal:</td>
 								<td id="cart-subtotal" class="text-right"></td>
 							</tr>
 							<tr>
@@ -156,8 +162,45 @@
 			</div>
 		</div>
 
-		<div id="validation-container">
+		<!-- Validation Container -->
+		<div id="container-validation" class="hide-element container mb-80">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-horizontal">
 
+						<div class="form-group">
+							<label for="input-item-id-validation" class="col-sm-2 control-label">Item ID:</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="input-item-id-validation" placeholder="Type item id. Ex: 1">
+								<span id="error-message-id-validation" class="help-block hide-element"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="input-quantity-validation" class="col-sm-2 control-label">Quantity:</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="input-quantity-validation" placeholder="Type quantity of item. Ex: 10">
+								<span id="error-message-quantity-validation" class="help-block hide-element"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button class="btn btn-default" id="btn-details-item-validation">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+									Details
+								</button>
+								<button class="btn btn-default" id="btn-add-item-validation">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									Add Item
+								</button>
+								<button class="btn btn-default" id="btn-remove-item-validation">
+									<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+									Remove Item
+								</button>
+							</div>
+						</div>
+					</div>
+			</div>
 		</div>
 	</main>
 	
@@ -180,7 +223,11 @@
 					<span class="txt-price">[price]</span>
 				</div>
 				<div class="text-center">
-					<button class="btn btn-default" data-id-product="[id]" onclick="onDetailsItems([id])">
+					<p>ID: [id] / Category [category] <br/>
+					Stock: [quantityInStock] / Max per buy [maxPerCostumer]</p>
+				</div>
+				<div class="text-center">
+					<button class="btn btn-default" data-id-product="[id]" onclick="onDetailsItems([id], 'main')">
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 						Details
 					</button>
@@ -263,6 +310,8 @@
 	<script src="js/objects.js"></script>
 	<script src="js/globalVariables.js"></script>
 	<script src="js/homeElements.js"></script>
+	<script src="js/generalFunctions.js"></script>
+	<script src="js/validation.js"></script>
 	<script src="js/cart.js"></script>	
 	<script src="js/mains.js"></script>	
 </body>

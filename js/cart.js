@@ -1,14 +1,3 @@
-function getItemFromCartById (id) {
-	var item = null;
-	for (let index = 0; index < cartItems.length; index++) {
-		if (cartItems[index].id == id) {
-			item = cartItems[index]
-			return item;		
-		}
-	}
-	return item;
-}
-
 function addItemToCartItem(id, quantity) {
 	var item = getItemById(id);
 	if (!quantity) {
