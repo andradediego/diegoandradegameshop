@@ -176,6 +176,8 @@ header, nav, section {
   color: rgb(47,85,114);
 }
 
-#table-cart-items tr td {
-  font-size: 24px;
+#table-cart-items td,
+thead th,
+tfoot td {
+  font-size: 20px;
 }

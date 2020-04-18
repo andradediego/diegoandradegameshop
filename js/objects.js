@@ -5,8 +5,8 @@ function CartItem (
 	shipping		
 ) {	
 	this.id = id;
-	this.price = price;
-	this.quantity = quantity;
+	this.price = parseFloat(price);
+	this.quantity = parseInt(quantity);
 	this.shipping = shipping;
 }
 
@@ -36,7 +36,7 @@ function StoreItem (
 	this.quantityInStock = quantityInStock;
 	this.maxPerCostumer = maxPerCostumer;
 	this.category = category;
-	this.costShipping = costShipping;
+	this.costShipping = parseFloat(costShipping);
 	this.description = description;
 	this.image = image;
 

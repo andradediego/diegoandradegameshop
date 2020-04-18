@@ -65,7 +65,7 @@ function addElementToPage (storeItems, currencyValue) {
 	let elementBase = protoItem.innerHTML;		
 	var storeItem = storeItems;		
 	currencyValue = parseFloat(currencyValue);
-	
+
 	var objKeys = Object.keys(storeItems);
 
 	for (let i = 0; i < objKeys.length; i++) {
@@ -157,35 +157,43 @@ function displayItensByFilter(element, category) {
 	populateItems(category);
 }
 
+function toggleHomeCart(displayHome) {
+	if (displayHome) {
+		btnHome.parentElement.classList.add('active');
+		btnCart.parentElement.classList.remove('active');
+		containerCart.classList.add("hide-element");
+		containerItens.classList.remove("hide-element");	
+	} else {
+		btnCart.parentElement.classList.add('active');
+		btnHome.parentElement.classList.remove('active');
+		containerItens.classList.add("hide-element");
+		containerCart.classList.remove("hide-element");		
+	}
+}
+
 
 // button to change to home
 btnHome.addEventListener('click', function(event) {
-	btnHome.parentElement.classList.add('active');
-	btnCart.parentElement.classList.remove('active');
-	containerCart.classList.add("hide-element");
-	containerItens.classList.remove("hide-element");	
+	toggleHomeCart(true);
+	event.preventDefault();
+});
+
+linkHomePage.addEventListener('click', function(event) {
+	toggleHomeCart(true);
 	event.preventDefault();
 });
 
 // button to change to home
 logoText.addEventListener('click', function(event) {
-	btnHome.parentElement.classList.add('active');
-	btnCart.parentElement.classList.remove('active');
-	containerCart.classList.add("hide-element");
-	containerItens.classList.remove("hide-element");	
+	toggleHomeCart(true);
 	event.preventDefault();
 });
 
 
 // button to change to cart
 btnCart.addEventListener('click', function(event) {
-	btnCart.parentElement.classList.add('active');
-	btnHome.parentElement.classList.remove('active');
-	containerItens.classList.add("hide-element");
-	containerCart.classList.remove("hide-element");		
-	
-	populateCart();
-	
+	toggleHomeCart(false);	
+	populateCart();	
 	event.preventDefault();
 });
 

@@ -105,6 +105,8 @@ function checkTotalQuantityCart() {
 
 		txtBadgeCart.innerHTML = totalItemsInCart;
 	}
+
+	displayHideCart();
 }
 
 function displayHideChangeQuantityFields(id, display) {
@@ -229,42 +231,73 @@ function showHideButtonsChangeQuantity(id, show) {
 // populate cart items 
 function populateCart() {
 	
-	tableCartItems.innerHTML = '';
-	const currencyValue = parseFloat( inputCurrency.value );
-	for (let index = 0; index < cartItems.length; index++) {
-		
+	displayHideCart();
 
-		let elementBase = protoRowCart.firstElementChild.innerHTML;
-		var item = cartItems[index];
-		var objKeys = Object.keys(item);	
-		for (let i = 0; i < objKeys.length; i++) {
-			switch (objKeys[i]) {
-				case 'price':
-					elementBase = elementBase.split('[' + objKeys[i] + ']').join('$' + ( currencyValue * item[objKeys[i]]).toFixed(2));
-					break;			
-				default:
-					elementBase = elementBase.split('[' + objKeys[i] + ']').join(item[objKeys[i]]);
-					break;
-			}
+	if (cartItems.length > 0) {
+		tableCartItems.innerHTML = '';
+		const currencyValue = parseFloat( inputCurrency.value );
+
+		let cartValuesTotal = 0;
+		let shipValueTotal = 0;
+		for (let index = 0; index < cartItems.length; index++) {
 			
+
+			let elementBase = protoRowCart.firstElementChild.innerHTML;
+			var item = cartItems[index];
+			var objKeys = Object.keys(item);	
+			for (let i = 0; i < objKeys.length; i++) {
+				switch (objKeys[i]) {
+					case 'price':
+						const price = (currencyValue * item[objKeys[i]]).toFixed(2);
+						elementBase = elementBase.split('[' + objKeys[i] + ']').join('$' + price );
+						break;			
+					default:
+						elementBase = elementBase.split('[' + objKeys[i] + ']').join(item[objKeys[i]]);
+						break;
+				}				
+			}
+			const subTotal = (currencyValue * (item.price * item.quantity)).toFixed(2);
+			// cumulative total cart
+			cartValuesTotal += parseFloat(subTotal);
+			shipValueTotal += item.quantity * item.shipping;
+
+			elementBase = elementBase.split('[subtotal]').join('$' +  subTotal);
+			tableCartItems.innerHTML += elementBase;
+		}		
+
+		//quantity fields
+		for (let index = 0; index < cartItems.length; index++) {		
+			var item = cartItems[index];
+			var dropDown = getElementByDataItemId(item.id, dropQuantityItem);		
+
+			if (item.quantity < 11) {				
+				dropDown.value = item.quantity;
+			} else {			
+				var txtQuantity = getElementByDataItemId(item.id, txtNewQuantityValue);
+				dropDown.classList.add("hide-element");
+				txtQuantity.classList.remove("hide-element");
+				txtQuantity.value = item.quantity;
+			}
 		}
-
-		elementBase = elementBase.split('[subtotal]').join('$' + (currencyValue * (item.price * item.quantity)).toFixed(2) );
-		tableCartItems.innerHTML += elementBase;
-	}
-
-	for (let index = 0; index < cartItems.length; index++) {		
-		var item = cartItems[index];
-		var dropDown = getElementByDataItemId(item.id, dropQuantityItem);	
 		
+		//populate totals
+		let cartSubTotalPrice = cartValuesTotal + shipValueTotal;
+		let cartTotalTaxes = cartSubTotalPrice * 0.13;
+		
+		cartItemsSubTotal.innerHTML = '$' + (cartValuesTotal).toFixed(2);
+		cartEstimatedShipping.innerHTML = '$' + (shipValueTotal).toFixed(2);		
+		cartSubtotal.innerHTML = '$' + cartSubTotalPrice.toFixed(2);		
+		cartEstimatedTax.innerHTML = '$' + cartTotalTaxes.toFixed(2);		
+		cartTotal.innerHTML = '$' + (cartSubTotalPrice + cartTotalTaxes).toFixed(2);
+	}
+}
 
-		if (item.quantity < 11) {				
-			dropDown.value = item.quantity;
-		} else {			
-			var txtQuantity = getElementByDataItemId(item.id, txtNewQuantityValue);
-			dropDown.classList.add("hide-element");
-			txtQuantity.classList.remove("hide-element");
-			txtQuantity.value = item.quantity;
-		}
+function displayHideCart() {
+	if (cartItems.length > 0) {
+		emptyCart.classList.add('hide-element');
+		tableCart.classList.remove('hide-element');
+	} else {
+		emptyCart.classList.remove('hide-element');
+		tableCart.classList.add('hide-element');
 	}
 }

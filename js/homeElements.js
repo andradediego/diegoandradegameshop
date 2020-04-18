@@ -28,7 +28,18 @@ var txtPrice = document.getElementsByClassName('txt-price');
 var txtBadgeCart = document.getElementById('txt-badge-cart');
 
 // cart page
+var linkHomePage = document.getElementById('link-home-page');
+var emptyCart = document.getElementById('empty-cart');
+var tableCart = document.getElementById('table-cart');
 var tableCartItems = document.getElementById('table-cart-items');
+var tableCartTotal = document.getElementById('table-cart-total');
+// cart subtotals and totals
+var cartItemsSubTotal = document.getElementById('cart-items-subtotal');
+var cartEstimatedShipping = document.getElementById('cart-estimated-shipping');
+var cartSubtotal = document.getElementById('cart-subtotal');
+var cartEstimatedTax = document.getElementById('cart-estimated-tax');
+var cartTotal = document.getElementById('cart-total');
+// cart quantity selectors
 var dropQuantityItem = document.getElementsByClassName('drop-quantity-item');
 var tableCartRowItem = document.getElementsByClassName('table-cart-row-item');
 var txtNewQuantityValue = document.getElementsByClassName('txt-new-quantity-value');
