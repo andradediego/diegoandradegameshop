@@ -12,11 +12,11 @@ function resetInputFieldsValidation() {
 
 function resetValidation() {
 	inputItemIdValidation.parentElement.parentElement.classList.remove('has-error', 'has-success', 'has-warning');
-	erroMessageIdValidation.classList.add('hide-element');
+	hideElement(erroMessageIdValidation);	
 	erroMessageIdValidation.innerHTML = '';
 
 	inputItemQuantityValidation.parentElement.parentElement.classList.remove('has-error', 'has-success', 'has-warning');
-	erroMessageQuantityValidation.classList.add('hide-element');
+	hideElement(erroMessageIdValidation);	
 	erroMessageQuantityValidation.innerHTML = '';
 }
 
@@ -26,7 +26,7 @@ function checkIdValid() {
 
 	if(!id) {
 		inputItemIdValidation.parentElement.parentElement.classList.add('has-error');
-		erroMessageIdValidation.classList.remove('hide-element');
+		showElement(erroMessageIdValidation);		
 		erroMessageIdValidation.innerHTML = 'Please enter a valid id!';
 
 		setTimeout(resetValidation, 3000);
@@ -38,7 +38,7 @@ function checkIdValid() {
 
 function setInputItemQualityValidationError(error, htmlClass) {
 	inputItemQuantityValidation.parentElement.parentElement.classList.add(htmlClass);
-	erroMessageQuantityValidation.classList.remove('hide-element');
+	showElement(erroMessageQuantityValidation);	
 	erroMessageQuantityValidation.innerHTML = error;
 }
 
@@ -56,12 +56,12 @@ function checkQuantityValid() {
 
 
 function onDetailsItems (id, page) {
-	
-	containerCurrency.classList.remove('hide-element');
-	containerItens.classList.add('hide-element');
-	containerCart.classList.add('hide-element');
-	containerValidation.classList.add('hide-element');
-	containerItemDetails.classList.remove('hide-element');
+
+	showElement(containerCurrency);
+	showElement(containerItemDetails);
+	hideElement(containerItens);
+	hideElement(containerCart);
+	hideElement(containerValidation);
 
 	id = parseInt(id);
 	
@@ -97,17 +97,20 @@ function onDetailsItems (id, page) {
 
 // back to main page
 function onBackFromDetails () {	
-	containerCart.classList.add('hide-element');
-	containerItemDetails.classList.add('hide-element');	
+
+	hideElement(containerCart);
+	hideElement(containerItemDetails);
 
 	if (btnValidation.parentElement.classList.contains('active')) {
-		containerItens.classList.add('hide-element');
-		containerValidation.classList.remove('hide-element');
-		containerCurrency.classList.add('hide-element');
+		showElement(containerValidation);
+		
+		hideElement(containerItens);
+		hideElement(containerCurrency);
 	} else {
-		containerValidation.classList.add('hide-element');
-		containerItens.classList.remove('hide-element');
-		containerCurrency.classList.remove('hide-element');
+		hideElement(containerValidation);
+		
+		showElement(containerItens);
+		showElement(containerCurrency);
 	}
 }
 

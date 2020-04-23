@@ -32,3 +32,35 @@ function getItemById(id) {
 
 	return item;
 }
+
+function showElement(element, cssClass) {
+	let display = 'block';
+
+	if (!cssClass) {
+		cssClass = 'show-element';
+	} else {
+		display = 'inline-block';
+	}
+
+	element.style.display = display;
+	setTimeout(function () {
+		element.classList.add(cssClass);
+	}, 100);
+}
+
+function hideElement(element, cssClass) {
+	let display = 'block';
+
+	if (!cssClass) {
+		cssClass = 'show-element';
+	} else {
+		display = 'inline-block';
+	}
+
+	element.style.display = display;
+
+	element.style.display = 'none';
+	setTimeout(function () {
+		element.classList.remove(cssClass);
+	}, 100);
+}

@@ -108,9 +108,8 @@ function displayItensByFilter(element, category) {
 	populateItems(category);
 }
 
-function switchBetweenContainers(numberContainer) {
-
-	containerItemDetails.classList.add("hide-element");
+function switchBetweenContainers(numberContainer) {	
+	hideElement(containerItemDetails);	
 	inputItemIdValidation.value = '';
 	inputItemQuantityValidation.value = '';
 
@@ -120,30 +119,30 @@ function switchBetweenContainers(numberContainer) {
 			btnCart.parentElement.classList.remove('active');
 			btnValidation.parentElement.classList.remove('active');
 
-			containerItens.classList.remove("hide-element");
-			containerCart.classList.add("hide-element");
-			containerValidation.classList.add("hide-element");
-			containerCurrency.classList.remove("hide-element");	
+			showElement(containerItens);
+			showElement(containerCurrency);
+			hideElement(containerCart);
+			hideElement(containerValidation);			
 			break;
 		case 2:
 			btnCart.parentElement.classList.add('active');
 			btnHome.parentElement.classList.remove('active');
 			btnValidation.parentElement.classList.remove('active');
 
-			containerCart.classList.remove("hide-element");
-			containerItens.classList.add("hide-element");
-			containerValidation.classList.add("hide-element");
-			containerCurrency.classList.remove("hide-element");			
+			showElement(containerCart);
+			showElement(containerCurrency);
+			hideElement(containerItens);
+			hideElement(containerValidation);
 			break;
 		case 3:
 			btnValidation.parentElement.classList.add('active');
 			btnHome.parentElement.classList.remove('active');
 			btnCart.parentElement.classList.remove('active');
 
-			containerValidation.classList.remove("hide-element");
-			containerCart.classList.add("hide-element");			
-			containerItens.classList.add("hide-element");	
-			containerCurrency.classList.add("hide-element");
+			showElement(containerValidation);
+			hideElement(containerCart);
+			hideElement(containerItens);
+			hideElement(containerCurrency);
 			break;
 	}
 }

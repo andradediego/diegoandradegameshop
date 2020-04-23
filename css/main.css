@@ -145,6 +145,10 @@ header, nav, section {
   margin: 10px 0;
 }
 
+.mx-10 {
+  margin: 0 10px;
+}
+
 .mb-80 {
   margin-bottom: 80px;
 }
@@ -161,13 +165,28 @@ header, nav, section {
   width: 75px;
 }
 
-.display-inline {
-  display: inline-block!important;
+.form-inline {
+  display: inline-block;
 }
 
 
 .hide-element {
-  display: none!important;
+  display: none;
+  transform: translateX(-3rem);
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
+
+.show-element {
+  display: block!important;
+  transform: translateX(0)!important;
+  opacity: 1!important;
+}
+
+.show-element-inline {
+  display: inline-block!important;
+  transform: translateX(0)!important;
+  opacity: 1!important;
 }
 
 #container-currency,
@@ -185,4 +204,12 @@ header, nav, section {
 thead th,
 tfoot td {
   font-size: 20px;
+}
+
+.w-100{
+  width: 100%;
+}
+
+.float-left {
+  float: left;
 }

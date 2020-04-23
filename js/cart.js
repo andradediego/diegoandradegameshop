@@ -82,10 +82,16 @@ function onAddCart(id, quantity) {
 	return true;
 }
 
+// element.style.display = 'block';
+// 	setTimeout(function () {
+// 		element.classList.add('show-element');
+// 	}, 100);
+
 function checkTotalQuantityCart() {
-	txtBadgeCart.classList.add("hide-element");
+	hideElement(txtBadgeCart, 'show-element-inline');
+	
 	if (cartItems.length > 0) {
-		txtBadgeCart.classList.remove("hide-element");
+		showElement(txtBadgeCart, 'show-element-inline');		
 
 		let totalItemsInCart = 0;
 		for (let index = 0; index < cartItems.length; index++) {
@@ -104,13 +110,13 @@ function displayHideChangeQuantityFields(id, display) {
 	var btnCancelQuantity = getElementByDataItemId(id, btnCancelQuantityValue);
 
 	if (display) {
-		txtQuantity.classList.remove("hide-element");
-		btnNewQuantity.classList.remove("hide-element");
-		btnCancelQuantity.classList.remove("hide-element");
+		showElement(txtQuantity);
+		showElement(btnNewQuantity);
+		showElement(btnCancelQuantity);
 	} else {
-		txtQuantity.classList.add("hide-element");
-		btnNewQuantity.classList.add("hide-element");
-		btnCancelQuantity.classList.add("hide-element");
+		hideElement(txtQuantity);
+		hideElement(btnNewQuantity);
+		hideElement(btnCancelQuantity);
 	}
 }
 
@@ -135,17 +141,15 @@ function onClickChangeQuantityItem (id) {
 				txtQuantity.value = '';
 				
 				var element = getElementByDataItemId(id, dropQuantityItem);
-				element.classList.remove("hide-element");			
+				showElement(element);				
 				element.value = newQty;			
 
 				displayHideChangeQuantityFields(id, false);			
 			}
-		} else if(newQty > 10) {
-			
+		} else if(newQty > 10) {			
 			if (onAddCart(id, newQty)) {
 				showHideButtonsChangeQuantity(id, false);
 			}
-			
 		} else {
 			removeCartItem(id);
 			checkTotalQuantityCart();
@@ -160,10 +164,9 @@ function onChangeQuantity (id) {
 	id = parseInt( id );	
 	var dropDown = getElementByDataItemId(id, dropQuantityItem);
 	const newQty = parseInt(dropDown.value);
-	
 	if (newQty) {
 		if (newQty > 10) {
-			dropDown.classList.add('hide-element');
+			hideElement(dropDown);
 			displayChangeQuantityFields(id);			
 		} else {
 			if (!onAddCart(id, newQty)) {
@@ -196,9 +199,19 @@ function onChangeQuantityByType (id) {
 function onClickCancelChangeQuantityItem(id) {
 	id = parseInt( id );	
 	var item = getItemFromCartById(id);
-
+	
+	var dropDown = getElementByDataItemId(id, dropQuantityItem);
 	var txtQuantity = getElementByDataItemId(id, txtNewQuantityValue);
-	txtQuantity.value = item.quantity;
+
+	if (item.quantity > 10) {
+		hideElement(dropDown);
+		txtQuantity.value = item.quantity;		
+		showElement(txtQuantity);
+	} else {
+		dropDown.value = item.quantity;
+		showElement(dropDown);
+		hideElement(txtQuantity);
+	}
 	showHideButtonsChangeQuantity(id, false);
 }
 
@@ -206,12 +219,12 @@ function showHideButtonsChangeQuantity(id, show) {
 	var btnNewQuantity = getElementByDataItemId(id, btnNewQuantityValue);
 	var btnCancelQuantity = getElementByDataItemId(id, btnCancelQuantityValue);
 	
-	if (show) {		
-		btnNewQuantity.classList.remove('hide-element');
-		btnCancelQuantity.classList.remove('hide-element');
+	if (show) {
+		showElement(btnNewQuantity);
+		showElement(btnCancelQuantity);
 	} else {
-		btnNewQuantity.classList.add('hide-element');
-		btnCancelQuantity.classList.add('hide-element');
+		hideElement(btnNewQuantity);
+		hideElement(btnCancelQuantity);
 	}
 
 }
@@ -263,8 +276,8 @@ function populateCart() {
 				dropDown.value = item.quantity;
 			} else {			
 				var txtQuantity = getElementByDataItemId(item.id, txtNewQuantityValue);
-				dropDown.classList.add("hide-element");
-				txtQuantity.classList.remove("hide-element");
+				showElement(txtQuantity);
+				hideElement(dropDown);
 				txtQuantity.value = item.quantity;
 			}
 		}
@@ -283,10 +296,10 @@ function populateCart() {
 
 function displayHideCart() {
 	if (cartItems.length > 0) {
-		emptyCart.classList.add('hide-element');
-		tableCart.classList.remove('hide-element');
+		hideElement(emptyCart);
+		showElement(tableCart);
 	} else {
-		emptyCart.classList.remove('hide-element');
-		tableCart.classList.add('hide-element');
+		hideElement(tableCart);
+		showElement(emptyCart);
 	}
 }

@@ -52,7 +52,7 @@ Purpose: Final project - Online Store
 
 	<main>
 		<!-- currency change -->
-		<div id="container-currency" class="container">
+		<div id="container-currency" class="hide-element show-element container">
 			<div class="row">
 				<div class="col-md-3 col-md-offset-9 col-xs-12">					
 					<div class="text-right-lg-screen my-10">												
@@ -63,7 +63,7 @@ Purpose: Final project - Online Store
 		</div>
 
 		<!-- List of items -->
-		<div id="container-itens" class="container mb-80">
+		<div id="container-itens" class="hide-element show-element container mb-80">
 			
 			<div class="row">
 				<!-- Tab Link -->
@@ -135,40 +135,43 @@ Purpose: Final project - Online Store
 						<h3 class="text-center">Ops, you cart is empty</h1>
 						<p class="text-center">Click <a href="#"  id="link-home-page">here</a> to start shopping</p>						
 					</div>
-					<table id="table-cart" class="table table-striped">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th class="text-right">Price</th>
-								<th>Quantity</th>
-								<th class="text-right">Subtotal</th>
-							</tr>
-						</thead>
-						<tbody id="table-cart-items">
-						</tbody>
-						<tfoot id="table-cart-total">
-							<tr class="info">
-								<td colspan="3" class="text-right">Items Subtotal:</td>
-								<td id="cart-items-subtotal" class="text-right"></td>
-							</tr>
-							<tr >
-								<td colspan="3" class="text-right">Estimated Shipping:</td>
-								<td id="cart-estimated-shipping" class="text-right"></td>
-							</tr>
-							<tr class="info">
-								<td colspan="3" class="text-right">Subtotal:</td>
-								<td id="cart-subtotal" class="text-right"></td>
-							</tr>
-							<tr>
-								<td colspan="3" class="text-right">Estimated Tax:</td>
-								<td id="cart-estimated-tax" class="text-right"></td>
-							</tr>
-							<tr class="info">
-								<td colspan="3" class="text-right">Order Total:</td>
-								<td id="cart-total" class="text-right"></td>
-							</tr>
-						</tfoot>
-					</table>
+					<div id="table-cart">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th class="text-right">Price</th>
+									<th>Quantity</th>
+									<th class="text-right">Subtotal</th>
+								</tr>
+							</thead>
+							<tbody id="table-cart-items">
+							</tbody>
+							<tfoot id="table-cart-total">
+								<tr class="info">
+									<td colspan="3" class="text-right">Items Subtotal:</td>
+									<td id="cart-items-subtotal" class="text-right"></td>
+								</tr>
+								<tr >
+									<td colspan="3" class="text-right">Estimated Shipping:</td>
+									<td id="cart-estimated-shipping" class="text-right"></td>
+								</tr>
+								<tr class="info">
+									<td colspan="3" class="text-right">Subtotal:</td>
+									<td id="cart-subtotal" class="text-right"></td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right">Estimated Tax:</td>
+									<td id="cart-estimated-tax" class="text-right"></td>
+								</tr>
+								<tr class="info">
+									<td colspan="3" class="text-right">Order Total:</td>
+									<td id="cart-total" class="text-right"></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -211,6 +214,7 @@ Purpose: Final project - Online Store
 							</div>
 						</div>
 					</div>
+			</div>
 			</div>
 		</div>
 	</main>
@@ -274,39 +278,39 @@ Purpose: Final project - Online Store
 				<tr class="table-cart-row-item" data-item-id="[id]">
 					<td scope="row">[id]</td>
 					<td class="text-right">[price]</td>
-					<td>
-						<select 
-							data-item-id="[id]"
-						 onchange="onChangeQuantity([id])"
-						 class="form-control drop-quantity-item">
-							<option value="0">Qtd 0 (delete)</option>
-							<option value="1">Qtd 1</option>
-							<option value="2">Qtd 2</option>
-							<option value="3">Qtd 3</option>
-							<option value="4">Qtd 4</option>
-							<option value="5">Qtd 5</option>
-							<option value="6">Qtd 6</option>
-							<option value="7">Qtd 7</option>
-							<option value="8">Qtd 8</option>
-							<option value="9">Qtd 9</option>
-							<option value="10">Qtd 10</option>
-							<option value="11">+ 10</option>
-						</select>
-						<div class="form-group">
+					<td>						
+						<div class="form-group form-inline w-100">
+							<select 
+								data-item-id="[id]"
+								onchange="onChangeQuantity([id])"
+								class="form-control drop-quantity-item mx-10 pull-left">
+								<option value="0">Qtd 0 (delete)</option>
+								<option value="1">Qtd 1</option>
+								<option value="2">Qtd 2</option>
+								<option value="3">Qtd 3</option>
+								<option value="4">Qtd 4</option>
+								<option value="5">Qtd 5</option>
+								<option value="6">Qtd 6</option>
+								<option value="7">Qtd 7</option>
+								<option value="8">Qtd 8</option>
+								<option value="9">Qtd 9</option>
+								<option value="10">Qtd 10</option>
+								<option value="11">+ 10</option>
+							</select>
 							<input type="number"
-							data-item-id="[id]" 
-							class="hide-element form-control txt-new-quantity-value max-width-75 display-inline" 
-							onchange="onChangeQuantityByType([id])"							
-							data-item-id="[id]" />
+								data-item-id="[id]" 
+								class="mx-10 hide-element form-control txt-new-quantity-value max-width-75 float-left" 
+								onchange="onChangeQuantityByType([id])"							
+								data-item-id="[id]" />
 							<button 
 								data-item-id="[id]"
-								class="btn btn-primary hide-element btn-new-quantity-value" 
+								class="mx-10 btn btn-primary hide-element btn-new-quantity-value float-left" 
 								onclick="onClickChangeQuantityItem([id])">
 								Accept
 							</button>
 							<button 
 								data-item-id="[id]"
-								class="btn btn-default hide-element btn-cancel-quantity-value" 
+								class="mx-10 btn btn-default hide-element btn-cancel-quantity-value float-left" 
 								onclick="onClickCancelChangeQuantityItem([id])">
 								Cancel
 							</button>
