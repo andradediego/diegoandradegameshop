@@ -31,6 +31,7 @@ var txtPrice = document.getElementsByClassName('txt-price');
 var txtBadgeCart = document.getElementById('txt-badge-cart');
 var txtOriginText = document.getElementsByClassName('txt-origin-text');
 
+
 // cart page
 var linkHomePage = document.getElementById('link-home-page');
 var emptyCart = document.getElementById('empty-cart');

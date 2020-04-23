@@ -109,9 +109,10 @@ header, nav, section {
 
 .col {
   flex: 1 0 21%;  
-  height: 435px;
-  padding: 2px;
-  margin-top: 40px;
+  height: 470px;
+  padding: 10px;
+  margin-top: 15px;
+  opacity: 0;
 }
 
 .img-wrapper {
@@ -129,7 +130,7 @@ header, nav, section {
 }
 
 .txt-padding {
-  height: 60px;
+  height: 50px;
   padding: 5px;
 }
 
@@ -169,20 +170,6 @@ header, nav, section {
   display: inline-block;
 }
 
-
-.hide-element {
-  display: none;
-  transform: translateX(-3rem);
-  opacity: 0;
-  transition: all 0.5s ease-out;
-}
-
-.show-element {
-  display: block!important;
-  transform: translateX(0)!important;
-  opacity: 1!important;
-}
-
 .show-element-inline {
   display: inline-block!important;
   transform: translateX(0)!important;
@@ -212,4 +199,31 @@ tfoot td {
 
 .float-left {
   float: left;
+}
+
+/* animation slide */
+.slide-fade div {
+  transition: all 0.4s ease-out;
+  transform: translateX(-3rem);
+  opacity: 0;
+}
+
+.slide-fade div.show,
+.slide-fade div.show div {
+  opacity: 1!important;
+  transform: translateX(0);
+}
+
+/* animation to display slide */
+.hide-element {
+  display: none;
+  transform: translateX(-3rem);
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
+
+.show-element {
+  display: block!important;
+  transform: translateX(0)!important;
+  opacity: 1!important;
 }

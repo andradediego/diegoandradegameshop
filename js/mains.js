@@ -48,6 +48,13 @@ function populateItems(category, currencyValue) {
 			addElementToPage(storeItems[index], currencyValue);
 		}
 	}
+
+	var divsContainer = document.querySelectorAll('#container-itens div.col');
+	setTimeout(function () {
+		for (let index = 0; index < divsContainer.length; index++) {			
+			divsContainer[index].classList.add('show');			
+		}
+	},100);
 }
 
 // add items do page
@@ -180,7 +187,9 @@ btnValidation.addEventListener('click', function(event) {
 
 // change the currency
 inputCurrency.addEventListener('change', function(event) {
-	populateItems(null, this.value);
+	var categoryActive = document.querySelector('li.tab-element.active');
+	var category = categoryActive.getAttribute("data-name-tab");	
+	populateItems(category, this.value);
 	populateCart();
 	event.preventDefault();
 });
