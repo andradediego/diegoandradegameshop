@@ -45,7 +45,7 @@ function showElement(element, cssClass) {
 	element.style.display = display;
 	setTimeout(function () {
 		element.classList.add(cssClass);
-	}, 100);
+	}, 10);
 }
 
 function hideElement(element, cssClass) {
@@ -62,5 +62,5 @@ function hideElement(element, cssClass) {
 	element.style.display = 'none';
 	setTimeout(function () {
 		element.classList.remove(cssClass);
-	}, 100);
+	}, 10);
 }

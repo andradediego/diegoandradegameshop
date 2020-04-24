@@ -296,10 +296,10 @@ function populateCart() {
 
 function displayHideCart() {
 	if (cartItems.length > 0) {
-		hideElement(emptyCart);
 		showElement(tableCart);
+		hideElement(emptyCart);
 	} else {
-		hideElement(tableCart);
 		showElement(emptyCart);
+		hideElement(tableCart);
 	}
 }
