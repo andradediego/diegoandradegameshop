@@ -14,9 +14,9 @@ function generateRandomQuantity() {
 }
 
 var currencies = [];
-currencies.push(new Currency('Canada - CAD', 1));
-currencies.push(new Currency('United States - USD', 0.7));
-currencies.push(new Currency('Brazil - BRL', 3.72));
+currencies.push(new Currency('Canada - CAD', 'CAD'));
+currencies.push(new Currency('United States - USD', 'USD'));
+currencies.push(new Currency('Brazil - BRL', 'BRL'));
 
 var categories = [];
 

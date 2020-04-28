@@ -35,30 +35,51 @@ function addTabToPage() {
 
 
 // populate the items
-function populateItems(category, currencyValue) {	
+function populateItems(category, currencySelected) {	
 	mainItems.innerHTML = '';
 	
-	if(!currencyValue) {
-		currencyValue = 1;
+	if (!currencySelected) {
+		currencySelected = currencies[0].value
 	}
 
+	let currencyValue = 1;
+	if (currencySelected != 'CAD') {
+		axios.get('https://api.exchangeratesapi.io/latest?base=CAD')
+		.then(function (response) {
+			currencyValue = parseFloat(response.data.rates[currencySelected]);			
+			populateItemsWithCurrencySelected(category, currencyValue, currencySelected);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		})		
+	} else {
+		populateItemsWithCurrencySelected(category, currencyValue, currencySelected);
+	}
+}
+
+function populateItemsWithCurrencySelected(category, currencyValue, currencySelected) {
 	var categoryId = getCategoryId(categories, category);
-	for (let index = 0; index < storeItems.length; index++) {
-		if (!category || (category && categoryId == storeItems[index].category)) {
-			addElementToPage(storeItems[index], currencyValue);
+		for (let index = 0; index < storeItems.length; index++) {
+			if (!category || (category && categoryId == storeItems[index].category)) {
+				addElementToPage(storeItems[index], currencyValue, currencySelected);
+			}
 		}
-	}
 
-	var divsContainer = document.querySelectorAll('#container-itens div.col');
-	setTimeout(function () {
-		for (let index = 0; index < divsContainer.length; index++) {			
-			divsContainer[index].classList.add('show');			
-		}
-	},100);
+		var divsContainer = document.querySelectorAll('#container-itens div.col');
+		setTimeout(function () {
+			for (let index = 0; index < divsContainer.length; index++) {			
+				divsContainer[index].classList.add('show');			
+			}
+		}, 100);
 }
 
 // add items do page
-function addElementToPage (storeItems, currencyValue) {
+function addElementToPage (storeItems, currencyValue, currencySelected) {
+	if (!currencySelected) {
+		currencySelected == 'CAD';
+	}
+
 	let elementBase = protoItem.innerHTML;		
 	var storeItem = storeItems;		
 	currencyValue = parseFloat(currencyValue);
@@ -67,7 +88,7 @@ function addElementToPage (storeItems, currencyValue) {
 
 	for (let i = 0; i < objKeys.length; i++) {
 		if(objKeys[i] == 'price') {
-			elementBase = elementBase.split('[' + objKeys[i] + ']').join('$' + (currencyValue * storeItem[objKeys[i]]).toFixed(2));
+			elementBase = elementBase.split('[' + objKeys[i] + ']').join(currencySelected + '$' + (currencyValue * storeItem[objKeys[i]]).toFixed(2));
 		} else {
 			elementBase = elementBase.split('[' + objKeys[i] + ']').join(storeItem[objKeys[i]]);		
 		}
@@ -112,7 +133,7 @@ function displayItensByFilter(element, category) {
 		tabElement[index].classList.remove("active");		
 	}	
 	element.parentElement.classList.add("active");
-	populateItems(category);
+	populateItems(category, null);
 }
 
 function switchBetweenContainers(numberContainer) {	
@@ -190,7 +211,8 @@ inputCurrency.addEventListener('change', function(event) {
 	var categoryActive = document.querySelector('li.tab-element.active');
 	var category = categoryActive.getAttribute("data-name-tab");	
 	populateItems(category, this.value);
-	populateCart();
+	populateCart();	
+
 	event.preventDefault();
 });
 
@@ -198,13 +220,13 @@ inputCurrency.addEventListener('change', function(event) {
 //load event
 document.addEventListener('DOMContentLoaded', function(event) {				
 	populateCurrency();
-	populateItems(null);
+	populateItems(null, null);
 	addTabToPage();
 
 	setInterval(onGetDate, 1000);
 
 	//cart.js
-	checkTotalQuantityCart();
+	checkTotalQuantityCart();	
 });
 
 for (let index = 0; index < btnAddReview.length; index++) {
