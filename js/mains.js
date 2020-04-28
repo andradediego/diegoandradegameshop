@@ -52,7 +52,7 @@ function populateItems(category, currencySelected) {
 		.catch(function (error) {
 			// handle error
 			console.log(error);
-		})		
+		});		
 	} else {
 		populateItemsWithCurrencySelected(category, currencyValue, currencySelected);
 	}
